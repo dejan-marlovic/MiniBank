@@ -13,6 +13,7 @@ public class Main {
         boolean isLoggedIn = false;
         int currentAcountNumber;
         int mainChoice;
+        String username;
         while (true) {
             System.out.println("Welcome to MiniBank!");
 
@@ -54,7 +55,8 @@ public class Main {
                     default:
                         System.out.println("Invalid option. Please try again.");
                 }
-                if (username.equals(correctUsername) && password.equals(correctPassword)) {
+                if (username.equals(Bank.getUser(currentAcountNumber).getName()) &&
+                        password.equals(Bank.getUser(currentAcountNumber).getPasswod())) {
                     isLoggedIn = true;
                     System.out.println("Login successful!");
                 } else {
