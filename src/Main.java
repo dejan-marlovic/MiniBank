@@ -12,10 +12,8 @@ public class Main {
         int pinNumber;
         boolean isLoggedIn = false;
         int currentAcountNumber;
-
-        double accountBalance = 1000.00; // Example account balance
         int mainChoice;
-        while (true) { // Outer loop to allow re-lo
+        while (true) {
             System.out.println("Welcome to MiniBank!");
 
             System.out.println("Choose an option:");
@@ -37,7 +35,8 @@ public class Main {
                         String username = scanner.nextLine();
                         System.out.println("Enter your password:");
                         password = scanner.nextLine();
-                        if (username.equals(Bank.getUser(currentAcountNumber).getName()) && password.equals(Bank.getUser(currentAcountNumber).getPasswod())) {
+                        if (username.equals(Bank.getUser(currentAcountNumber).getName()) &&
+                                password.equals(Bank.getUser(currentAcountNumber).getPasswod())) {
                             isLoggedIn = true;
                             System.out.println("Login successful!");
                         } else {
@@ -64,9 +63,8 @@ public class Main {
                 }
             }
 
-            // Bank withdrawal process
-            while (isLoggedIn) { // Inner loop for banking operations
-                System.out.println("\nYour current balance: $" + accountBalance);
+
+            while (isLoggedIn) {
 
                 System.out.println("Choose an option:");
                 System.out.println("1. Show all my accounts");
@@ -89,12 +87,12 @@ public class Main {
                     case 4:
                         isLoggedIn = false;
                         System.out.println("You have been logged out. Returning to login screen...");
-                        scanner.nextLine(); // Consume leftover newline
+                        scanner.nextLine();
                         break;
                     case 5:
                         System.out.println("Exiting. Have a nice day!");
                         scanner.close();
-                        return; // Exit the program
+                        return;
                     default:
                         System.out.println("Invalid option. Please try again.");
                 }
