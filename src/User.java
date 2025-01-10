@@ -1,6 +1,6 @@
 public class User {
 
-    public User(SavingsAccount savingsAccount, PayrollAccount payrollAccount, String name){
+    public User(SavingsAccount savingsAccount, PayrollAccount payrollAccount, String name, int accountNumber){
 
     }
 }

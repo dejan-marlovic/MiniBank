@@ -7,6 +7,8 @@ public class Main {
         // Simulate login
         String correctUsername = "user123";
         String correctPassword = "password";
+        String username;
+        String password;
         boolean isLoggedIn = false;
 
         double accountBalance = 1000.00; // Example account balance
@@ -28,9 +30,9 @@ public class Main {
                         break;
                     case 2:
                         System.out.println("Enter your username:");
-                        String username = scanner.nextLine();
+                        username = scanner.nextLine();
                         System.out.println("Enter your password:");
-                        String password = scanner.nextLine();
+                        password = scanner.nextLine();
                         if (username.equals(correctUsername) && password.equals(correctPassword)) {
                             isLoggedIn = true;
                             System.out.println("Login successful!");
@@ -42,11 +44,8 @@ public class Main {
 
                     case 3:
                         isLoggedIn = false;
-                        System.out.println("You have been logged out. Returning to login screen...");
-                        scanner.nextLine(); // Consume leftover newline
-                        break;
-                    case 5:
                         System.out.println("Exiting. Have a nice day!");
+                        scanner.nextLine();
                         scanner.close();
                         return; // Exit the program
                     default:
@@ -66,23 +65,16 @@ public class Main {
                 System.out.println("\nYour current balance: $" + accountBalance);
 
                 System.out.println("Choose an option:");
-                System.out.println("1. Withdraw $100");
-                System.out.println("2. Withdraw $200");
-                System.out.println("3. Withdraw $500");
-                System.out.println("4. Logout");
-                System.out.println("5. Exit");
+                System.out.println("1. Show all my accounts");
+                System.out.println("2. make a transfer between accounts");
+                System.out.println("3. Logout");
 
                 System.out.print("Enter your choice: ");
                 int choice = scanner.nextInt();
 
                 switch (choice) {
                     case 1:
-                        if (accountBalance >= 100) {
-                            accountBalance -= 100;
-                            System.out.println("You withdrew $100. New balance: $" + accountBalance);
-                        } else {
-                            System.out.println("Insufficient funds.");
-                        }
+
                         break;
                     case 2:
                         if (accountBalance >= 200) {
