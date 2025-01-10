@@ -6,6 +6,26 @@ public class User {
     private int accountNumber;
     private int pinNumber;
 
+    public PayrollAccount getPayrollAccount() {
+        return payrollAccount;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAccountNumber() {
+        return accountNumber;
+    }
+
+    public int getPinNumber() {
+        return pinNumber;
+    }
+
+    public SavingsAccount getSavingsAccount() {
+        return savingsAccount;
+    }
+
     public User(SavingsAccount savingsAccount,
                 PayrollAccount payrollAccount,
                 String name,
