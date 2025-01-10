@@ -24,6 +24,14 @@ public class Bank {
                 user.getSavingsAccount().getAccountNumber());
         System.out.println("Savings account balance:" +
                 user.getSavingsAccount().getBalance());
+        System.out.println("Payroll account number: " +
+                user.getPayrollAccount().getAccountNumber());
+        System.out.println("Payroll account balance:" +
+                user.getPayrollAccount().getBalance());
+    }
+
+    static User getUser(int accountNumber){
+        return users.get(accountNumber);
     }
 
 }

@@ -5,6 +5,11 @@ public class User {
     private String name;
     private int accountNumber;
     private int pinNumber;
+    private String passwod;
+
+    public String getPasswod() {
+        return passwod;
+    }
 
     public PayrollAccount getPayrollAccount() {
         return payrollAccount;

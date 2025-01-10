@@ -11,6 +11,7 @@ public class Main {
         String password;
         int pinNumber;
         boolean isLoggedIn = false;
+        int currentAcountNumber;
 
         double accountBalance = 1000.00; // Example account balance
         int mainChoice;
@@ -29,14 +30,14 @@ public class Main {
                         accountName = scanner.nextLine();
                         System.out.println("Enter pin number:");
                         pinNumber = scanner.nextInt();
-                        Bank.createUser(accountName, pinNumber);
+                        currentAcountNumber = Bank.createUser(accountName, pinNumber);
                         break;
                     case 2:
                         System.out.println("Enter your username:");
-                        username = scanner.nextLine();
+                        String username = scanner.nextLine();
                         System.out.println("Enter your password:");
                         password = scanner.nextLine();
-                        if (username.equals(correctUsername) && password.equals(correctPassword)) {
+                        if (username.equals(Bank.getUser(currentAcountNumber).getName()) && password.equals(Bank.getUser(currentAcountNumber).getPasswod())) {
                             isLoggedIn = true;
                             System.out.println("Login successful!");
                         } else {
@@ -77,7 +78,7 @@ public class Main {
 
                 switch (choice) {
                     case 1:
-
+                        Bank.showUserAccounts(currentAcountNumber);
                         break;
                     case 2:
 
