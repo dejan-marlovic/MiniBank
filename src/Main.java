@@ -7,8 +7,9 @@ public class Main {
         // Simulate login
         String correctUsername = "user123";
         String correctPassword = "password";
-        String username;
+        String accountName;
         String password;
+        int pinNumber;
         boolean isLoggedIn = false;
 
         double accountBalance = 1000.00; // Example account balance
@@ -25,8 +26,10 @@ public class Main {
                 switch (mainChoice) {
                     case 1:
                         System.out.println("Enter name you wish to create account under:");
-                        String accountName = scanner.nextLine();
-                        Bank.createUser(accountName);
+                        accountName = scanner.nextLine();
+                        System.out.println("Enter pin number:");
+                        pinNumber = scanner.nextInt();
+                        Bank.createUser(accountName, pinNumber);
                         break;
                     case 2:
                         System.out.println("Enter your username:");
@@ -77,20 +80,10 @@ public class Main {
 
                         break;
                     case 2:
-                        if (accountBalance >= 200) {
-                            accountBalance -= 200;
-                            System.out.println("You withdrew $200. New balance: $" + accountBalance);
-                        } else {
-                            System.out.println("Insufficient funds.");
-                        }
+
                         break;
                     case 3:
-                        if (accountBalance >= 500) {
-                            accountBalance -= 500;
-                            System.out.println("You withdrew $500. New balance: $" + accountBalance);
-                        } else {
-                            System.out.println("Insufficient funds.");
-                        }
+
                         break;
                     case 4:
                         isLoggedIn = false;

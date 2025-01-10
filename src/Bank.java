@@ -9,11 +9,15 @@ public class Bank {
         return ++accountCounter;
     }
 
-    static void createUser(String name){
+    static void createUser(String name, int pinNumber){
         SavingsAccount savingsAccount = new SavingsAccount();
         PayrollAccount payrollAccount = new PayrollAccount();
-        User user = new User(savingsAccount, payrollAccount, name, generateAccountNumber());
+        User user = new User(savingsAccount, payrollAccount, name, generateAccountNumber(), pinNumber );
         users.add(user);
+    }
+
+    static void showAccounts(){
+        for ()
     }
 
 }
