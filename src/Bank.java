@@ -13,7 +13,7 @@ public class Bank {
     static int createUser(String name, int pinNumber){
         SavingsAccount savingsAccount = new SavingsAccount(generateAccountNumber());
         PayrollAccount payrollAccount = new PayrollAccount(generateAccountNumber());
-        User user = new User(savingsAccount, payrollAccount, name, generateAccountNumber(), pinNumber );
+        User user = new User(savingsAccount, payrollAccount, name, generateAccountNumber(), pinNumber);
         users.put(accountCounter,user);
         return accountCounter;
     }

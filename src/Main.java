@@ -5,15 +5,11 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         // Simulate login
-        String correctUsername = "user123";
-        String correctPassword = "password";
-        String accountName;
-        String password;
-        int pinNumber;
+        String accountName = "";
+        int pinNumber = 0;
         boolean isLoggedIn = false;
-        int currentAcountNumber;
+        int currentAcountNumber = 0;
         int mainChoice;
-        String username;
         while (true) {
             System.out.println("Welcome to MiniBank!");
 
@@ -22,6 +18,7 @@ public class Main {
             System.out.println("2. Sign in");
             System.out.println("3. Quit");
             mainChoice = scanner.nextInt();
+            scanner.nextLine();
             if (!isLoggedIn) {
                 switch (mainChoice) {
                     case 1:
@@ -33,11 +30,11 @@ public class Main {
                         break;
                     case 2:
                         System.out.println("Enter your username:");
-                        String username = scanner.nextLine();
-                        System.out.println("Enter your password:");
-                        password = scanner.nextLine();
-                        if (username.equals(Bank.getUser(currentAcountNumber).getName()) &&
-                                password.equals(Bank.getUser(currentAcountNumber).getPasswod())) {
+                        accountName = scanner.nextLine();
+                        System.out.println("Enter your pin number:");
+                        pinNumber = scanner.nextInt();
+                        if (accountName.equals(Bank.getUser(currentAcountNumber).getName()) &&
+                                pinNumber == Bank.getUser(currentAcountNumber).getPinNumber()) {
                             isLoggedIn = true;
                             System.out.println("Login successful!");
                         } else {
@@ -55,8 +52,8 @@ public class Main {
                     default:
                         System.out.println("Invalid option. Please try again.");
                 }
-                if (username.equals(Bank.getUser(currentAcountNumber).getName()) &&
-                        password.equals(Bank.getUser(currentAcountNumber).getPasswod())) {
+                if (accountName.equals(Bank.getUser(currentAcountNumber).getName()) &&
+                        pinNumber == Bank.getUser(currentAcountNumber).getPinNumber()) {
                     isLoggedIn = true;
                     System.out.println("Login successful!");
                 } else {
