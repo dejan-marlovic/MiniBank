@@ -27,6 +27,7 @@ public class Main {
                         System.out.println("Enter pin number:");
                         pinNumber = scanner.nextInt();
                         currentAcountNumber = Bank.createUser(accountName, pinNumber);
+                        System.out.println(currentAcountNumber);
                         break;
                     case 2:
                         System.out.println("Enter your username:");

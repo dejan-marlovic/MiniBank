@@ -11,11 +11,12 @@ public class Bank {
     }
 
     static int createUser(String name, int pinNumber){
+        int userAccountNumber = generateAccountNumber();
         SavingsAccount savingsAccount = new SavingsAccount(generateAccountNumber());
         PayrollAccount payrollAccount = new PayrollAccount(generateAccountNumber());
         User user = new User(savingsAccount, payrollAccount, name, generateAccountNumber(), pinNumber);
-        users.put(accountCounter,user);
-        return accountCounter;
+        users.put(userAccountNumber,user);
+        return userAccountNumber;
     }
 
     static void showUserAccounts(int accountNumber){
