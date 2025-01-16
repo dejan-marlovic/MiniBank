@@ -1,6 +1,5 @@
 public class SavingsAccount  extends Account{
 
-
     public SavingsAccount(int accountNumber) {
         this.accountNumber = accountNumber;
     }

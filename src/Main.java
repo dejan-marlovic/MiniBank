@@ -11,6 +11,7 @@ public class Main {
         int mainMenuChoice;
         while (true) {
             System.out.println("Welcome to MiniBank!");
+            System.out.println("=============================================================================================");
 
             System.out.println("Choose an option:");
             System.out.println("1. Create an account");

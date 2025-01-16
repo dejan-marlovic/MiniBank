@@ -59,7 +59,6 @@ public class Bank {
                user = usr;
             }
         }
-
         return user;
     }
 

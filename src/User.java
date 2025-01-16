@@ -1,11 +1,23 @@
 public class User {
 
-    private SavingsAccount savingsAccount;
-    private PayrollAccount payrollAccount;
-    private String name;
+    private final SavingsAccount savingsAccount;
+    private final PayrollAccount payrollAccount;
+    private final String name;
     private int accountNumber;
-    private int pinNumber;
+    private final int pinNumber;
 
+    public User(SavingsAccount savingsAccount,
+                PayrollAccount payrollAccount,
+                String name,
+                int accountNumber,
+                int pinNumber) {
+
+        this.savingsAccount = savingsAccount;
+        this.payrollAccount = payrollAccount;
+        this.name = name;
+        this.pinNumber = pinNumber;
+
+    }
 
     public PayrollAccount getPayrollAccount() {
         return payrollAccount;
@@ -27,16 +39,5 @@ public class User {
         return savingsAccount;
     }
 
-    public User(SavingsAccount savingsAccount,
-                PayrollAccount payrollAccount,
-                String name,
-                int accountNumber,
-                int pinNumber) {
 
-        this.savingsAccount = savingsAccount;
-        this.payrollAccount = payrollAccount;
-        this.name = name;
-        this.pinNumber = pinNumber;
-
-    }
 }
