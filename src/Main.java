@@ -50,7 +50,7 @@ public class Main {
                         isLoggedIn = false;
                         System.out.println("Exiting. Have a nice day!");
                         scanner.close();
-                        System.exit(0);
+                        return;
                     default:
                         System.out.println("Invalid option. Please try again.");
                 }
