@@ -19,16 +19,26 @@ public class Bank {
         return userAccountNumber;
     }
 
+    static void printRowDelimiterLine() {
+        System.out.println("=============================================================================================");
+    }
+
+
     static void showUserAccounts(int accountNumber) {
         User user = users.get(accountNumber);
+
+        System.out.println("User account number: " + accountNumber);
+        System.out.println("Account username: " + user.getName());
+        printRowDelimiterLine();
         System.out.println("Savings account number: " +
                 user.getSavingsAccount().getAccountNumber());
-        System.out.println("Savings account balance:" +
+        System.out.println("Savings account balance: " +
                 user.getSavingsAccount().getBalance());
         System.out.println("Payroll account number: " +
                 user.getPayrollAccount().getAccountNumber());
-        System.out.println("Payroll account balance:" +
+        System.out.println("Payroll account balance: " +
                 user.getPayrollAccount().getBalance());
+        printRowDelimiterLine();
     }
 
     static User getUser(int accountNumber) {

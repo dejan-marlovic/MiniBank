@@ -9,7 +9,7 @@ public class Main {
         int pinNumber = 0;
         boolean isLoggedIn = false;
         int currentAcountNumber = 0;
-        int mainChoice;
+        int mainMenuChoice;
         while (true) {
             System.out.println("Welcome to MiniBank!");
 
@@ -17,10 +17,10 @@ public class Main {
             System.out.println("1. Create an account");
             System.out.println("2. Sign in");
             System.out.println("3. Quit");
-            mainChoice = scanner.nextInt();
+            mainMenuChoice = scanner.nextInt();
             scanner.nextLine();
             if (!isLoggedIn) {
-                switch (mainChoice) {
+                switch (mainMenuChoice) {
                     case 1:
                         System.out.println("Enter name you wish to create account under:");
                         accountName = scanner.nextLine();
@@ -34,9 +34,7 @@ public class Main {
                         accountName = scanner.nextLine();
                         System.out.println("Enter your pin number:");
                         pinNumber = scanner.nextInt();
-
                         User user = Bank.getUserByNameAndPin(accountName, pinNumber);
-
                         if (user != null) {
                             isLoggedIn = true;
                             System.out.println("Login successful!");
@@ -45,9 +43,7 @@ public class Main {
                             continue; // Return to the login prompt
                         }
                         break;
-
                     case 3:
-                        isLoggedIn = false;
                         System.out.println("Exiting. Have a nice day!");
                         scanner.close();
                         return;
@@ -74,7 +70,6 @@ public class Main {
 
                 System.out.print("Enter your choice: ");
                 int choice = scanner.nextInt();
-
                 switch (choice) {
                     case 1:
                         Bank.showUserAccounts(currentAcountNumber);
@@ -87,12 +82,6 @@ public class Main {
                         System.out.println("You have been logged out. Returning to login screen...");
                         scanner.nextLine();
                         break;
-                    case 4:
-
-                    case 5:
-                        System.out.println("Exiting. Have a nice day!");
-                        scanner.close();
-                        return;
                     default:
                         System.out.println("Invalid option. Please try again.");
                 }
