@@ -4,7 +4,6 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Simulate login
         String accountName = "";
         int pinNumber = 0;
         boolean isLoggedIn = false;

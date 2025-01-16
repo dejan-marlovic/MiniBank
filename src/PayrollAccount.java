@@ -1,6 +1,4 @@
-public class PayrollAccount {
-    private double balance;
-    private int accountNumber;
+public class PayrollAccount extends Account {
 
     public PayrollAccount(int accountNumber) {
         this.accountNumber = accountNumber;

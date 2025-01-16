@@ -1,6 +1,5 @@
-public class SavingsAccount {
-    private double balance;
-    private int accountNumber;
+public class SavingsAccount  extends Account{
+
 
     public SavingsAccount(int accountNumber) {
         this.accountNumber = accountNumber;
