@@ -34,8 +34,10 @@ public class Main {
                         accountName = scanner.nextLine();
                         System.out.println("Enter your pin number:");
                         pinNumber = scanner.nextInt();
-                        if (accountName.equals(Bank.getUser(currentAcountNumber).getName()) &&
-                                pinNumber == Bank.getUser(currentAcountNumber).getPinNumber()) {
+
+                        User user = Bank.getUserByNameAndPin(accountName, pinNumber);
+
+                        if (user != null) {
                             isLoggedIn = true;
                             System.out.println("Login successful!");
                         } else {
@@ -82,13 +84,12 @@ public class Main {
 
                         break;
                     case 3:
-
-                        break;
-                    case 4:
                         isLoggedIn = false;
                         System.out.println("You have been logged out. Returning to login screen...");
                         scanner.nextLine();
                         break;
+                    case 4:
+
                     case 5:
                         System.out.println("Exiting. Have a nice day!");
                         scanner.close();
