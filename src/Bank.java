@@ -5,6 +5,7 @@ public class Bank {
 
     private static int accountCounter;
     private static HashMap<Integer, User> users = new HashMap<Integer, User>();
+    private static HashMap<Integer, Account> accounts = new HashMap<Integer, Account>();
 
     static int generateAccountNumber() {
         return ++accountCounter;
@@ -12,8 +13,12 @@ public class Bank {
 
     static int createUser(String name, int pinNumber) {
         int userAccountNumber = generateAccountNumber();
-        SavingsAccount savingsAccount = new SavingsAccount(generateAccountNumber());
-        PayrollAccount payrollAccount = new PayrollAccount(generateAccountNumber());
+        int savingsAccountNumber = generateAccountNumber();
+        int payrollAccountNumber = generateAccountNumber();
+        SavingsAccount savingsAccount = new SavingsAccount(savingsAccountNumber);
+        PayrollAccount payrollAccount = new PayrollAccount(payrollAccountNumber);
+        accounts.put(savingsAccountNumber,savingsAccount);
+        accounts.put(payrollAccountNumber,payrollAccount);
         User user = new User(savingsAccount, payrollAccount, name, userAccountNumber, pinNumber);
         users.put(userAccountNumber, user);
         return userAccountNumber;
@@ -67,13 +72,13 @@ public class Bank {
     }
 
 
-    static void accountTransfer(int fromAcc, int toAcc, double amount, int currentUser) {
+    static void accountTransfer(int fromAcc, int toAcc, double amount) {
         printRowDelimiterLine();
         System.out.println("Starting transaction between accounts!");
         try {
-            Bank.getUser(currentUser).getAccount(fromAcc).withdrawal(amount);
+            Bank.accounts.get(fromAcc).withdrawal(amount);
             try{
-                Bank.getUser(currentUser).getAccount(toAcc).deposit(amount);
+                Bank.accounts.get(toAcc).deposit(amount);
 
             }catch (IllegalArgumentException e){
                 System.out.println(e.getMessage());

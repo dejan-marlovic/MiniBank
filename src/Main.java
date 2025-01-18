@@ -65,8 +65,10 @@ public class Main {
 
                 System.out.println("Choose an option:");
                 System.out.println("1. Show all my accounts");
-                System.out.println("2. make a transfer between accounts");
+                System.out.println("2. Make a transfer between accounts");
                 System.out.println("3. Logout");
+                System.out.println("4. Make a deposit");
+                System.out.println("5. Make a withdrawal");
 
                 System.out.print("Enter your choice: ");
                 int choice = scanner.nextInt();
@@ -75,23 +77,45 @@ public class Main {
                         Bank.showUserAccounts(currentAccountNumber);
                         break;
                     case 2:
-                        System.out.println("Enter account number you want to transfer funds to: ");
                         Bank.printRowDelimiterLine();
                         Bank.showAllAccounts();
+                        Bank.printRowDelimiterLine();
+                        System.out.println("Enter an account number you want to transfer funds to: ");
                         int toAccount = scanner.nextInt();
                         scanner.nextLine();
-                        System.out.println("Enter account number you want to transfer funds from: ");
+                        System.out.println("Enter an account number you want to transfer funds from: ");
                         int fromAccount = scanner.nextInt();
                         scanner.nextLine();
                         System.out.println("Enter amount you would like to transfer:");
                         double amount = scanner.nextDouble();
-                        Bank.accountTransfer(fromAccount, toAccount, amount, currentAccountNumber);
+                        Bank.accountTransfer(fromAccount, toAccount, amount);
                         break;
 
                     case 3:
                         isLoggedIn = false;
                         System.out.println("You have been logged out. Returning to login screen...");
                         scanner.nextLine();
+                        break;
+
+                    case 4:
+                        Bank.showUserAccounts(currentAccountNumber);
+                        System.out.println("Pick an account you would like to make a deposit to:");
+                        int depositAccount = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.println("How much would you like to deposit?");
+                        double depositAmount = scanner.nextDouble();
+                        scanner.nextLine();
+                        Bank.getUser(currentAccountNumber).getAccount(depositAccount).deposit(depositAmount);
+                        break;
+                    case 5:
+                        Bank.showUserAccounts(currentAccountNumber);
+                        System.out.println("Pick an account you would like to make a withdrawal from:");
+                        int from = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.println("How much would you like to withdraw?");
+                        double withdrawalAmount = scanner.nextDouble();
+                        scanner.nextLine();
+                        Bank.getUser(currentAccountNumber).getAccount(from).withdrawal(withdrawalAmount);
                         break;
                     default:
                         System.out.println("Invalid option. Please try again.");
