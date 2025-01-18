@@ -3,7 +3,7 @@ public class User {
     private final SavingsAccount savingsAccount;
     private final PayrollAccount payrollAccount;
     private final String name;
-    private int accountNumber;
+    private final int accountNumber;
     private final int pinNumber;
 
     public User(SavingsAccount savingsAccount,
@@ -16,6 +16,7 @@ public class User {
         this.payrollAccount = payrollAccount;
         this.name = name;
         this.pinNumber = pinNumber;
+        this.accountNumber = accountNumber;
 
     }
 
@@ -39,5 +40,23 @@ public class User {
         return savingsAccount;
     }
 
+    Account getAccount(int accountNr) {
+        Account account = null;
 
+        if (this.savingsAccount.getAccountNumber() == accountNr) {
+            account = savingsAccount;
+        }
+        if (this.payrollAccount.accountNumber == accountNr) {
+            account = payrollAccount;
+        }
+        if (account == null) {
+            throw new IllegalArgumentException("Could not find an account with that account number!");
+        } else {
+            return account;
+
+        }
+    }
 }
+
+
+

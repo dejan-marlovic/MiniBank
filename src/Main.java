@@ -7,7 +7,7 @@ public class Main {
         String accountName = "";
         int pinNumber = 0;
         boolean isLoggedIn = false;
-        int currentAcountNumber = 0;
+        int currentAccountNumber = 0;
         int mainMenuChoice;
         while (true) {
             System.out.println("Welcome to MiniBank!");
@@ -26,8 +26,8 @@ public class Main {
                         accountName = scanner.nextLine();
                         System.out.println("Enter pin number:");
                         pinNumber = scanner.nextInt();
-                        currentAcountNumber = Bank.createUser(accountName, pinNumber);
-                        System.out.println(currentAcountNumber);
+                        currentAccountNumber = Bank.createUser(accountName, pinNumber);
+                        System.out.println(currentAccountNumber);
                         break;
                     case 2:
                         System.out.println("Enter your username:");
@@ -35,7 +35,7 @@ public class Main {
                         System.out.println("Enter your pin number:");
                         pinNumber = scanner.nextInt();
                         User user = Bank.getUserByNameAndPin(accountName, pinNumber);
-                        if (user != null) {
+                        if (user !=  null) {
                             isLoggedIn = true;
                             System.out.println("Login successful!");
                         } else {
@@ -50,8 +50,8 @@ public class Main {
                     default:
                         System.out.println("Invalid option. Please try again.");
                 }
-                if (accountName.equals(Bank.getUser(currentAcountNumber).getName()) &&
-                        pinNumber == Bank.getUser(currentAcountNumber).getPinNumber()) {
+                if (accountName.equals(Bank.getUser(currentAccountNumber).getName()) &&
+                        pinNumber == Bank.getUser(currentAccountNumber).getPinNumber()) {
                     isLoggedIn = true;
                     System.out.println("Login successful!");
                 } else {
@@ -60,8 +60,8 @@ public class Main {
                 }
             }
 
-
             while (isLoggedIn) {
+                System.out.println("=============================================================================================");
 
                 System.out.println("Choose an option:");
                 System.out.println("1. Show all my accounts");
@@ -72,11 +72,22 @@ public class Main {
                 int choice = scanner.nextInt();
                 switch (choice) {
                     case 1:
-                        Bank.showUserAccounts(currentAcountNumber);
+                        Bank.showUserAccounts(currentAccountNumber);
                         break;
                     case 2:
-
+                        System.out.println("Enter account number you want to transfer funds to: ");
+                        Bank.printRowDelimiterLine();
+                        Bank.showAllAccounts();
+                        int toAccount = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.println("Enter account number you want to transfer funds from: ");
+                        int fromAccount = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.println("Enter amount you would like to transfer:");
+                        double amount = scanner.nextDouble();
+                        Bank.accountTransfer(fromAccount, toAccount, amount, currentAccountNumber);
                         break;
+
                     case 3:
                         isLoggedIn = false;
                         System.out.println("You have been logged out. Returning to login screen...");
