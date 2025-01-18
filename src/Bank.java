@@ -4,8 +4,8 @@ import java.util.HashMap;
 public class Bank {
 
     private static int accountCounter;
-    private static HashMap<Integer, User> users = new HashMap<Integer, User>();
-    private static HashMap<Integer, Account> accounts = new HashMap<Integer, Account>();
+    private final static HashMap<Integer, User> users = new HashMap<>();
+    private final static HashMap<Integer, Account> accounts = new HashMap<>();
 
     static int generateAccountNumber() {
         return ++accountCounter;
@@ -89,6 +89,7 @@ public class Bank {
 
             }
             System.out.println("Transaction completed successfully!");
+            printRowDelimiterLine();
 
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
