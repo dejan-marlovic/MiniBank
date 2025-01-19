@@ -74,7 +74,7 @@ public class Main {
                         scanner.close();
                         return;
                     default:
-                        System.out.println("Invalid option. Valid options are: 1,2 or 3. Please try again!");
+                        System.out.println("Invalid option. Valid options are: 1, 2 or 3. Please try again!");
                 }
 
                 if (currentUserAccountNumber != 0){
@@ -176,7 +176,7 @@ public class Main {
                             continue;
                         }
                     default:
-                        System.out.println("Invalid option. Please try again.");
+                        System.out.println("Invalid input! Valid inputs are: 1, 2, 3, 4 or 5!");
                 }
             }
         }

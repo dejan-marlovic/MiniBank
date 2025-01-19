@@ -1,17 +1,25 @@
+/**
+ * This class represents a bank account
+ */
 public class Account {
-
+    /**
+     * Stores account balance
+     */
     protected double balance;
-    protected  int accountNumber;
+
+    /**
+     * Stores account number
+     */
+    protected int accountNumber;
 
 
     public void withdrawal(double amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("Withdrawal amount can not be negative!");
         }
-        if (balance - amount < 0)
-        {
+        if (balance - amount < 0) {
             throw new IllegalArgumentException("Can not withdraw amount: "
-                    + amount +" from account: " + accountNumber +
+                    + amount + " from account: " + accountNumber +
                     ". Insufficient funds!");
         }
         balance -= amount;
@@ -35,6 +43,7 @@ public class Account {
                 + ", total balance is now: "
                 + this.balance);
     }
+
     public void printRowDelimiterLine() {
         System.out.println("=============================================================================================");
     }
