@@ -12,7 +12,7 @@ public class Main {
         User currentUser;
         while (true) {
             System.out.println("Welcome to MiniBank!");
-            System.out.println("=============================================================================================");
+            Bank.printRowDelimiterLine();
 
             System.out.println("Choose an option:");
             System.out.println("1. Create an account");
@@ -23,13 +23,22 @@ public class Main {
             if (!isLoggedIn) {
                 switch (mainMenuChoice) {
                     case 1:
-                        System.out.println("Enter name you wish to create account under:");
-                        accountName = scanner.nextLine();
-                        System.out.println("Enter pin number:");
-                        pinNumber = scanner.nextInt();
-                        currentUserAccountNumber = Bank.createUser(accountName, pinNumber);
-                        System.out.println("Account has been created! Logging in.....");
-                        break;
+                        try {
+                            System.out.println("Enter name you wish to create account under:");
+                            accountName = scanner.nextLine();
+                            Bank.validateAccountName(accountName);
+                            System.out.println("Enter pin number:");
+                            pinNumber = scanner.nextInt();
+                            scanner.nextLine();
+                            currentUserAccountNumber = Bank.createUser(accountName, pinNumber);
+                            System.out.println("Account has been created! Logging in.....");
+                            isLoggedIn = true;
+                            break;
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
+                            continue;
+                        }
+
                     case 2:
                         System.out.println("Enter your username:");
                         accountName = scanner.nextLine();
@@ -39,7 +48,7 @@ public class Main {
                             currentUser = Bank.getUserByNameAndPin(accountName, pinNumber);
                             currentUserAccountNumber = currentUser.getAccountNumber();
                             isLoggedIn = true;
-                        }catch(IllegalArgumentException e){
+                        } catch (IllegalArgumentException e) {
                             System.out.println(e.getMessage());
                             continue; // Return to the login prompt
                         }

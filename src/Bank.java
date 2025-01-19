@@ -118,4 +118,16 @@ public class Bank {
         }
 
     }
+
+    static void validateAccountName(String accountName){
+        if (accountName.matches(".*\\d.*")){
+            throw new IllegalArgumentException("Name can not contain numbers!");
+        }
+        if(accountName.length() <= 2){
+            throw new IllegalArgumentException("Name has to be longer than 2 characters!");
+        }
+        if (accountName.matches("^-.*|.*-$")) {
+            throw new IllegalArgumentException("Name can not start or end with a hyphen!");
+        }
+    }
 }
