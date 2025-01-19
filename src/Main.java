@@ -48,6 +48,7 @@ public class Main {
                             continue;
                         } catch (RuntimeException e) {
                             System.out.println(e.getMessage());
+                            scanner.nextLine();
                             continue;
                         }
 
@@ -66,6 +67,7 @@ public class Main {
                             continue;
                         } catch (RuntimeException e) {
                             System.out.println(e.getMessage());// Catches IllegalArgumentException
+                            scanner.nextLine();
                             continue;
                         }
                         break;
@@ -157,6 +159,9 @@ public class Main {
                             System.out.println("Invalid input! Please enter integer account number!");
                             scanner.nextLine(); // Clear the invalid input from the scanner
                             continue;
+                        }catch (RuntimeException e) {
+                            System.out.println("Invalid input! Can not find account with that number!");
+                            continue;
                         }
 
                     case 5:
@@ -173,6 +178,9 @@ public class Main {
                         } catch (InputMismatchException e) {
                             System.out.println("Invalid input! Please enter integer account number!.");
                             scanner.nextLine(); // Clear the invalid input from the scanner
+                            continue;
+                        }catch(RuntimeException e){
+                            System.out.println("Invalid input! Can not find account with that account number!.");
                             continue;
                         }
                     default:
