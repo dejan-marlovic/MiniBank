@@ -126,7 +126,13 @@ public class Bank {
 
     }
 
-
+    /**
+     * Function for transferring funds between accounts
+     * @param fromAcc parameter representing account we transfer funds to.
+     * @param toAcc parameter representing account we transfer funds from.
+     * @param amount amount we want to transfer.
+     * @param currentUserAccountNumber we use current account number form input to make sure that we are allowed to withdraw funds.
+     */
     static void accountTransfer(int fromAcc, int toAcc, double amount, int currentUserAccountNumber) {
         printRowDelimiterLine();
         System.out.println("Starting transaction between accounts!");
