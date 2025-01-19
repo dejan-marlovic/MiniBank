@@ -19,8 +19,15 @@ public class Main {
             System.out.println("1. Create an account");
             System.out.println("2. Sign in");
             System.out.println("3. Quit");
-            mainMenuChoice = scanner.nextInt();
-            scanner.nextLine();
+            try {
+                mainMenuChoice = scanner.nextInt();
+                scanner.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input! Valid inputs are: 1, 2 or 3.");
+                scanner.nextLine(); // Clear the invalid input from the scanner
+                continue;
+            }
+
             if (!isLoggedIn) {
                 switch (mainMenuChoice) {
                     case 1:
@@ -67,19 +74,24 @@ public class Main {
                         scanner.close();
                         return;
                     default:
-                        System.out.println("Invalid option. Please try again.");
+                        System.out.println("Invalid option. Valid options are: 1,2 or 3. Please try again!");
                 }
-                if (accountName.equals(Bank.getUser(currentUserAccountNumber).getName()) &&
-                        pinNumber == Bank.getUser(currentUserAccountNumber).getPinNumber()) {
-                    isLoggedIn = true;
-                    System.out.println("Login successful!");
-                } else {
-                    System.out.println("Invalid username or password.");
-                    continue; // Return to the login prompt
+
+                if (currentUserAccountNumber != 0){
+                    if (accountName.equals(Bank.getUser(currentUserAccountNumber).getName()) &&
+                            pinNumber == Bank.getUser(currentUserAccountNumber).getPinNumber()) {
+                        isLoggedIn = true;
+                        System.out.println("Login successful!");
+                    } else {
+                        System.out.println("Invalid username or password.");
+                        continue; // Return to the login prompt
+                    }
                 }
+
             }
 
             while (isLoggedIn) {
+                int choice = 0;
                 Bank.printRowDelimiterLine();
 
                 System.out.println("Choose an option:");
@@ -89,26 +101,39 @@ public class Main {
                 System.out.println("4. Make a deposit");
                 System.out.println("5. Make a withdrawal");
 
-                int choice = scanner.nextInt();
+                try {
+                    choice = scanner.nextInt();
+                    scanner.nextLine();
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input! Valid inputs are: 1, 2, 3, 4 or 5!");
+                    scanner.nextLine(); // Clear the invalid input from the scanner
+
+                }
                 switch (choice) {
                     case 1:
                         Bank.showUserAccounts(currentUserAccountNumber);
                         break;
                     case 2:
-                        System.out.println("Enter an account number you want to transfer funds from: ");
-                        Bank.showUserAccounts(currentUserAccountNumber);
-                        int fromAccount = scanner.nextInt();
-                        scanner.nextLine();
-                        Bank.printRowDelimiterLine();
-                        Bank.showAllAccounts();
-                        Bank.printRowDelimiterLine();
-                        System.out.println("Enter an account number you want to transfer funds to: ");
-                        int toAccount = scanner.nextInt();
-                        scanner.nextLine();
-                        System.out.println("Enter amount you would like to transfer:");
-                        double amount = scanner.nextDouble();
-                        Bank.accountTransfer(fromAccount, toAccount, amount, currentUserAccountNumber);
-                        break;
+                        try {
+                            System.out.println("Enter an account number you want to transfer funds from: ");
+                            Bank.showUserAccounts(currentUserAccountNumber);
+                            int fromAccount = scanner.nextInt();
+                            scanner.nextLine();
+                            Bank.printRowDelimiterLine();
+                            Bank.showAllAccounts();
+                            Bank.printRowDelimiterLine();
+                            System.out.println("Enter an account number you want to transfer funds to: ");
+                            int toAccount = scanner.nextInt();
+                            scanner.nextLine();
+                            System.out.println("Enter amount you would like to transfer:");
+                            double amount = scanner.nextDouble();
+                            Bank.accountTransfer(fromAccount, toAccount, amount, currentUserAccountNumber);
+                            break;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Invalid input! Please enter a numeric value for the pin number.");
+                            scanner.nextLine(); // Clear the invalid input from the scanner
+                            continue;
+                        }
 
                     case 3:
                         isLoggedIn = false;
@@ -117,25 +142,39 @@ public class Main {
                         break;
 
                     case 4:
-                        Bank.showUserAccounts(currentUserAccountNumber);
-                        System.out.println("Pick an account you would like to make a deposit to:");
-                        int depositAccount = scanner.nextInt();
-                        scanner.nextLine();
-                        System.out.println("How much would you like to deposit?");
-                        double depositAmount = scanner.nextDouble();
-                        scanner.nextLine();
-                        Bank.getUser(currentUserAccountNumber).getAccount(depositAccount).deposit(depositAmount);
-                        break;
+                        try {
+                            Bank.showUserAccounts(currentUserAccountNumber);
+                            System.out.println("Pick an account you would like to make a deposit to:");
+                            int depositAccount = scanner.nextInt();
+                            scanner.nextLine();
+                            System.out.println("How much would you like to deposit?");
+                            double depositAmount = scanner.nextDouble();
+                            scanner.nextLine();
+                            Bank.getUser(currentUserAccountNumber).getAccount(depositAccount).deposit(depositAmount);
+                            break;
+
+                        } catch (InputMismatchException e) {
+                            System.out.println("Invalid input! Please enter a numeric value for the pin number.");
+                            scanner.nextLine(); // Clear the invalid input from the scanner
+                            continue;
+                        }
+
                     case 5:
-                        Bank.showUserAccounts(currentUserAccountNumber);
-                        System.out.println("Pick an account you would like to make a withdrawal from:");
-                        int from = scanner.nextInt();
-                        scanner.nextLine();
-                        System.out.println("How much would you like to withdraw?");
-                        double withdrawalAmount = scanner.nextDouble();
-                        scanner.nextLine();
-                        Bank.getUser(currentUserAccountNumber).getAccount(from).withdrawal(withdrawalAmount);
-                        break;
+                        try {
+                            Bank.showUserAccounts(currentUserAccountNumber);
+                            System.out.println("Pick an account you would like to make a withdrawal from:");
+                            int from = scanner.nextInt();
+                            scanner.nextLine();
+                            System.out.println("How much would you like to withdraw?");
+                            double withdrawalAmount = scanner.nextDouble();
+                            scanner.nextLine();
+                            Bank.getUser(currentUserAccountNumber).getAccount(from).withdrawal(withdrawalAmount);
+                            break;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Invalid input! Please enter a numeric value for the pin number.");
+                            scanner.nextLine(); // Clear the invalid input from the scanner
+                            continue;
+                        }
                     default:
                         System.out.println("Invalid option. Please try again.");
                 }

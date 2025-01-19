@@ -119,11 +119,11 @@ public class Bank {
 
     }
 
-    static void validateAccountName(String accountName){
-        if (accountName.matches(".*\\d.*")){
+    static void validateAccountName(String accountName) {
+        if (accountName.matches(".*\\d.*")) {
             throw new IllegalArgumentException("Name can not contain numbers!");
         }
-        if(accountName.length() <= 2){
+        if (accountName.length() <= 2) {
             throw new IllegalArgumentException("Name has to be longer than 2 characters!");
         }
         if (accountName.matches("^-.*|.*-$")) {
