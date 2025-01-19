@@ -129,6 +129,7 @@ public class Main {
                             scanner.nextLine();
                             System.out.println("Enter amount you would like to transfer:");
                             double amount = scanner.nextDouble();
+                            scanner.nextLine();
                             Bank.accountTransfer(fromAccount, toAccount, amount, currentUserAccountNumber);
                             break;
                         } catch (InputMismatchException e) {
