@@ -9,6 +9,7 @@ public class Main {
         boolean isLoggedIn = false;
         int currentAccountNumber = 0;
         int mainMenuChoice;
+        User currentUser;
         while (true) {
             System.out.println("Welcome to MiniBank!");
             System.out.println("=============================================================================================");
@@ -27,19 +28,18 @@ public class Main {
                         System.out.println("Enter pin number:");
                         pinNumber = scanner.nextInt();
                         currentAccountNumber = Bank.createUser(accountName, pinNumber);
-                        System.out.println(currentAccountNumber);
                         break;
                     case 2:
                         System.out.println("Enter your username:");
                         accountName = scanner.nextLine();
                         System.out.println("Enter your pin number:");
                         pinNumber = scanner.nextInt();
-                        User user = Bank.getUserByNameAndPin(accountName, pinNumber);
-                        if (user !=  null) {
+                        try {
+                            currentUser = Bank.getUserByNameAndPin(accountName, pinNumber);
+                            currentAccountNumber  =  currentUser.getAccountNumber();
                             isLoggedIn = true;
-                            System.out.println("Login successful!");
-                        } else {
-                            System.out.println("Invalid username or password.");
+                        }catch(IllegalArgumentException e){
+                            System.out.println(e.getMessage());
                             continue; // Return to the login prompt
                         }
                         break;
@@ -61,7 +61,7 @@ public class Main {
             }
 
             while (isLoggedIn) {
-                System.out.println("=============================================================================================");
+                Bank.printRowDelimiterLine();
 
                 System.out.println("Choose an option:");
                 System.out.println("1. Show all my accounts");
@@ -77,14 +77,15 @@ public class Main {
                         Bank.showUserAccounts(currentAccountNumber);
                         break;
                     case 2:
+                        System.out.println("Enter an account number you want to transfer funds from: ");
+                        Bank.showUserAccounts(currentAccountNumber);
+                        int fromAccount = scanner.nextInt();
+                        scanner.nextLine();
                         Bank.printRowDelimiterLine();
                         Bank.showAllAccounts();
                         Bank.printRowDelimiterLine();
                         System.out.println("Enter an account number you want to transfer funds to: ");
                         int toAccount = scanner.nextInt();
-                        scanner.nextLine();
-                        System.out.println("Enter an account number you want to transfer funds from: ");
-                        int fromAccount = scanner.nextInt();
                         scanner.nextLine();
                         System.out.println("Enter amount you would like to transfer:");
                         double amount = scanner.nextDouble();

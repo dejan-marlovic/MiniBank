@@ -29,9 +29,10 @@ public class Bank {
     }
 
 
-    static void showUserAccounts(int accountNumber) {
-        User user = users.get(accountNumber);
-
+    static void showUserAccounts(int userAccountNumber) {
+        System.out.println("Showing user accounts:");
+        printRowDelimiterLine();
+        User user = users.get(userAccountNumber);
         System.out.println("Account name: " + user.getName());
         printRowDelimiterLine();
         System.out.println("Savings account number: " +
