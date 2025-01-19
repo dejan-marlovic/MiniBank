@@ -1,11 +1,19 @@
 
 import java.util.HashMap;
 
+/**
+ * Class representing Bank. This class contains account and user collection. It also contains helper
+ * functions for: Creating users, Creating accounts, Handling transfer between accounts, generating
+ * account numbers, generating user account numbers, listing users and listing accounts
+ */
 public class Bank {
 
     private static int accountCounter;
     private final static HashMap<Integer, User> users = new HashMap<>();
     private final static HashMap<Integer, Account> accounts = new HashMap<>();
+
+    private Bank() {
+    }
 
     static int generateAccountNumber() {
         return ++accountCounter;

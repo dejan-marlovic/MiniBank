@@ -12,7 +12,9 @@ public class Account {
      */
     protected int accountNumber;
 
-
+    /**
+     * @param amount subtracts this amount from total account balance
+     */
     public void withdrawal(double amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("Withdrawal amount can not be negative!");
@@ -26,6 +28,9 @@ public class Account {
         messageOutput("Withdrawal has been made from account: ", amount);
     }
 
+    /**
+     * @param amount adds this amount to total account balance
+     */
     public void deposit(double amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("Deposit amount can not be negative!");
@@ -34,6 +39,12 @@ public class Account {
         messageOutput("Deposit has been made to account: ", amount);
     }
 
+    /**
+     *
+     * General print out function
+     * @param message message to be printed before amount is shown.
+     * @param amount to be shown after each message
+     */
     public void messageOutput(String message, double amount) {
         printRowDelimiterLine();
         System.out.println(message
@@ -44,6 +55,9 @@ public class Account {
                 + this.balance);
     }
 
+    /**
+     * Helper function. Prints out row delimiter
+     */
     public void printRowDelimiterLine() {
         System.out.println("=============================================================================================");
     }

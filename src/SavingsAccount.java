@@ -1,3 +1,7 @@
+
+/**
+ * Class representing savings account, extends Account
+ */
 public class SavingsAccount  extends Account{
 
     public SavingsAccount(int accountNumber) {
