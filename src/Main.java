@@ -28,6 +28,7 @@ public class Main {
                         System.out.println("Enter pin number:");
                         pinNumber = scanner.nextInt();
                         currentUserAccountNumber = Bank.createUser(accountName, pinNumber);
+                        System.out.println("Account has been created! Logging in.....");
                         break;
                     case 2:
                         System.out.println("Enter your username:");
@@ -38,7 +39,6 @@ public class Main {
                             currentUser = Bank.getUserByNameAndPin(accountName, pinNumber);
                             currentUserAccountNumber = currentUser.getAccountNumber();
                             isLoggedIn = true;
-                            System.out.println("Account has been created! Logging in.....");
                         }catch(IllegalArgumentException e){
                             System.out.println(e.getMessage());
                             continue; // Return to the login prompt
