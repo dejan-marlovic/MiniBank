@@ -17,8 +17,8 @@ public class Bank {
         int payrollAccountNumber = generateAccountNumber();
         SavingsAccount savingsAccount = new SavingsAccount(savingsAccountNumber);
         PayrollAccount payrollAccount = new PayrollAccount(payrollAccountNumber);
-        accounts.put(savingsAccountNumber,savingsAccount);
-        accounts.put(payrollAccountNumber,payrollAccount);
+        accounts.put(savingsAccountNumber, savingsAccount);
+        accounts.put(payrollAccountNumber, payrollAccount);
         User user = new User(savingsAccount, payrollAccount, name, userAccountNumber, pinNumber);
         users.put(userAccountNumber, user);
         return userAccountNumber;
@@ -50,18 +50,17 @@ public class Bank {
 
         if (users.get(accountNumber) != null) {
             return users.get(accountNumber);
-
-        }else{
-            throw  new IllegalArgumentException("Could not find User with that name!");
+        } else {
+            throw new IllegalArgumentException("Could not find User with that account number!");
         }
 
     }
 
-    static User getUserByNameAndPin(String name, int pinNumber){
+    static User getUserByNameAndPin(String name, int pinNumber) {
         User user = null;
-        for (User usr : users.values()){
-            if (usr.getPinNumber() == pinNumber && usr.getName().equals(name)){
-               user = usr;
+        for (User usr : users.values()) {
+            if (usr.getPinNumber() == pinNumber && usr.getName().equals(name)) {
+                user = usr;
             }
         }
         if (user == null) {
@@ -73,15 +72,18 @@ public class Bank {
     }
 
 
-    static void accountTransfer(int fromAcc, int toAcc, double amount) {
+    static void accountTransfer(int fromAcc, int toAcc, double amount, int currentUserAccountNumber) {
         printRowDelimiterLine();
         System.out.println("Starting transaction between accounts!");
         try {
-            Bank.accounts.get(fromAcc).withdrawal(amount);
-            try{
-                Bank.accounts.get(toAcc).deposit(amount);
-
-            }catch (IllegalArgumentException e){
+            if (users.get(currentUserAccountNumber).getPayrollAccount().accountNumber == fromAcc
+            || users.get(currentUserAccountNumber).getSavingsAccount().accountNumber == fromAcc) {
+                accounts.get(fromAcc).withdrawal(amount);
+            }
+            else throw new IllegalArgumentException("You can only make a withdrawal from your own accounts!");
+            try {
+                accounts.get(toAcc).deposit(amount);
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 System.out.println("Starting rollback process..");
                 //rollback
@@ -98,9 +100,13 @@ public class Bank {
         printRowDelimiterLine();
     }
 
-    static void showAllAccounts(){
-        for (User user : users.values()){
+    static void showAllAccounts() {
+        printRowDelimiterLine();
+        System.out.println("Showing all accounts you can deposit funds to:");
+        printRowDelimiterLine();
+        for (User user : users.values()) {
             showUserAccounts(user.getAccountNumber());
         }
+        printRowDelimiterLine();
     }
 }

@@ -7,7 +7,7 @@ public class Main {
         String accountName = "";
         int pinNumber = 0;
         boolean isLoggedIn = false;
-        int currentAccountNumber = 0;
+        int currentUserAccountNumber = 0;
         int mainMenuChoice;
         User currentUser;
         while (true) {
@@ -27,7 +27,7 @@ public class Main {
                         accountName = scanner.nextLine();
                         System.out.println("Enter pin number:");
                         pinNumber = scanner.nextInt();
-                        currentAccountNumber = Bank.createUser(accountName, pinNumber);
+                        currentUserAccountNumber = Bank.createUser(accountName, pinNumber);
                         break;
                     case 2:
                         System.out.println("Enter your username:");
@@ -36,8 +36,9 @@ public class Main {
                         pinNumber = scanner.nextInt();
                         try {
                             currentUser = Bank.getUserByNameAndPin(accountName, pinNumber);
-                            currentAccountNumber  =  currentUser.getAccountNumber();
+                            currentUserAccountNumber = currentUser.getAccountNumber();
                             isLoggedIn = true;
+                            System.out.println("Account has been created! Logging in.....");
                         }catch(IllegalArgumentException e){
                             System.out.println(e.getMessage());
                             continue; // Return to the login prompt
@@ -50,8 +51,8 @@ public class Main {
                     default:
                         System.out.println("Invalid option. Please try again.");
                 }
-                if (accountName.equals(Bank.getUser(currentAccountNumber).getName()) &&
-                        pinNumber == Bank.getUser(currentAccountNumber).getPinNumber()) {
+                if (accountName.equals(Bank.getUser(currentUserAccountNumber).getName()) &&
+                        pinNumber == Bank.getUser(currentUserAccountNumber).getPinNumber()) {
                     isLoggedIn = true;
                     System.out.println("Login successful!");
                 } else {
@@ -70,15 +71,14 @@ public class Main {
                 System.out.println("4. Make a deposit");
                 System.out.println("5. Make a withdrawal");
 
-                System.out.print("Enter your choice: ");
                 int choice = scanner.nextInt();
                 switch (choice) {
                     case 1:
-                        Bank.showUserAccounts(currentAccountNumber);
+                        Bank.showUserAccounts(currentUserAccountNumber);
                         break;
                     case 2:
                         System.out.println("Enter an account number you want to transfer funds from: ");
-                        Bank.showUserAccounts(currentAccountNumber);
+                        Bank.showUserAccounts(currentUserAccountNumber);
                         int fromAccount = scanner.nextInt();
                         scanner.nextLine();
                         Bank.printRowDelimiterLine();
@@ -89,7 +89,7 @@ public class Main {
                         scanner.nextLine();
                         System.out.println("Enter amount you would like to transfer:");
                         double amount = scanner.nextDouble();
-                        Bank.accountTransfer(fromAccount, toAccount, amount);
+                        Bank.accountTransfer(fromAccount, toAccount, amount, currentUserAccountNumber);
                         break;
 
                     case 3:
@@ -99,24 +99,24 @@ public class Main {
                         break;
 
                     case 4:
-                        Bank.showUserAccounts(currentAccountNumber);
+                        Bank.showUserAccounts(currentUserAccountNumber);
                         System.out.println("Pick an account you would like to make a deposit to:");
                         int depositAccount = scanner.nextInt();
                         scanner.nextLine();
                         System.out.println("How much would you like to deposit?");
                         double depositAmount = scanner.nextDouble();
                         scanner.nextLine();
-                        Bank.getUser(currentAccountNumber).getAccount(depositAccount).deposit(depositAmount);
+                        Bank.getUser(currentUserAccountNumber).getAccount(depositAccount).deposit(depositAmount);
                         break;
                     case 5:
-                        Bank.showUserAccounts(currentAccountNumber);
+                        Bank.showUserAccounts(currentUserAccountNumber);
                         System.out.println("Pick an account you would like to make a withdrawal from:");
                         int from = scanner.nextInt();
                         scanner.nextLine();
                         System.out.println("How much would you like to withdraw?");
                         double withdrawalAmount = scanner.nextDouble();
                         scanner.nextLine();
-                        Bank.getUser(currentAccountNumber).getAccount(from).withdrawal(withdrawalAmount);
+                        Bank.getUser(currentUserAccountNumber).getAccount(from).withdrawal(withdrawalAmount);
                         break;
                     default:
                         System.out.println("Invalid option. Please try again.");
