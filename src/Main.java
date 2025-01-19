@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -32,25 +33,33 @@ public class Main {
                             scanner.nextLine();
                             currentUserAccountNumber = Bank.createUser(accountName, pinNumber);
                             System.out.println("Account has been created! Logging in.....");
-                            isLoggedIn = true;
                             break;
-                        } catch (IllegalArgumentException e) {
+
+                        } catch (InputMismatchException e) {
+                            System.out.println("Invalid input! Please enter a numeric value for the pin number.");
+                            scanner.nextLine(); // Clear the invalid input from the scanner
+                            continue;
+                        } catch (RuntimeException e) {
                             System.out.println(e.getMessage());
                             continue;
                         }
 
                     case 2:
-                        System.out.println("Enter your username:");
-                        accountName = scanner.nextLine();
-                        System.out.println("Enter your pin number:");
-                        pinNumber = scanner.nextInt();
                         try {
+                            System.out.println("Enter your username:");
+                            Bank.validateAccountName(accountName);
+                            accountName = scanner.nextLine();
+                            System.out.println("Enter your pin number:");
+                            pinNumber = scanner.nextInt();
                             currentUser = Bank.getUserByNameAndPin(accountName, pinNumber);
                             currentUserAccountNumber = currentUser.getAccountNumber();
-                            isLoggedIn = true;
-                        } catch (IllegalArgumentException e) {
-                            System.out.println(e.getMessage());
-                            continue; // Return to the login prompt
+                        } catch (InputMismatchException e) {
+                            System.out.println("Invalid input! Please enter a numeric value for the pin number.");
+                            scanner.nextLine(); // Clear the invalid input from the scanner
+                            continue;
+                        } catch (RuntimeException e) {
+                            System.out.println(e.getMessage());// Catches IllegalArgumentException
+                            continue;
                         }
                         break;
                     case 3:

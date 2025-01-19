@@ -30,7 +30,7 @@ public class Bank {
 
 
     static void showUserAccounts(int userAccountNumber) {
-        System.out.println("Showing user accounts:");
+        System.out.println("Showing your accounts:");
         printRowDelimiterLine();
         User user = users.get(userAccountNumber);
         System.out.println("Account name: " + user.getName());
