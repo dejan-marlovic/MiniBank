@@ -130,7 +130,7 @@ public class Main {
                             Bank.accountTransfer(fromAccount, toAccount, amount, currentUserAccountNumber);
                             break;
                         } catch (InputMismatchException e) {
-                            System.out.println("Invalid input! Please enter a numeric value for the pin number.");
+                            System.out.println("Invalid input! Please enter integer account number!");
                             scanner.nextLine(); // Clear the invalid input from the scanner
                             continue;
                         }
@@ -154,7 +154,7 @@ public class Main {
                             break;
 
                         } catch (InputMismatchException e) {
-                            System.out.println("Invalid input! Please enter a numeric value for the pin number.");
+                            System.out.println("Invalid input! Please enter integer account number!");
                             scanner.nextLine(); // Clear the invalid input from the scanner
                             continue;
                         }
@@ -171,7 +171,7 @@ public class Main {
                             Bank.getUser(currentUserAccountNumber).getAccount(from).withdrawal(withdrawalAmount);
                             break;
                         } catch (InputMismatchException e) {
-                            System.out.println("Invalid input! Please enter a numeric value for the pin number.");
+                            System.out.println("Invalid input! Please enter integer account number!.");
                             scanner.nextLine(); // Clear the invalid input from the scanner
                             continue;
                         }
