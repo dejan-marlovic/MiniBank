@@ -7,31 +7,63 @@ import java.util.HashMap;
  * account numbers, generating user account numbers, listing users and listing accounts
  */
 public class Bank {
-
+    /**
+     * accountCounter keeps track of each account number and inrements each time new account is created via function:
+     * generateAccountNumber()
+     */
     private static int accountCounter;
+
+    /**
+     * Stores user accounts
+     */
     private final static HashMap<Integer, User> users = new HashMap<>();
+
+    /**
+     * Stores bank accounts
+     */
     private final static HashMap<Integer, Account> accounts = new HashMap<>();
 
+    /**
+     * This is a helper class with helper methods, we will never instantiate an object of this class.
+     * This is why the constructor is private
+     */
     private Bank() {
     }
 
+    /**
+     * Increments account counter, This function is used for generation of  user and account numbers
+     */
     static int generateAccountNumber() {
         return ++accountCounter;
     }
 
+    /**
+     * Creates user account by first generating unique account and user numbers. Each user account has
+     * savings bank account and payroll bank account. Account number is generated for each.
+     * @param name
+     * @param pinNumber
+     * @return
+     */
     static int createUser(String name, int pinNumber) {
         int userAccountNumber = generateAccountNumber();
         int savingsAccountNumber = generateAccountNumber();
         int payrollAccountNumber = generateAccountNumber();
+
         SavingsAccount savingsAccount = new SavingsAccount(savingsAccountNumber);
         PayrollAccount payrollAccount = new PayrollAccount(payrollAccountNumber);
+
         accounts.put(savingsAccountNumber, savingsAccount);
         accounts.put(payrollAccountNumber, payrollAccount);
+
         User user = new User(savingsAccount, payrollAccount, name, userAccountNumber, pinNumber);
         users.put(userAccountNumber, user);
+
         return userAccountNumber;
     }
 
+    /**
+     * Prints row delimiter for more readable console printouts.
+     */
     static void printRowDelimiterLine() {
         System.out.println("=============================================================================================");
     }
