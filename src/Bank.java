@@ -76,20 +76,19 @@ public class Bank {
         printRowDelimiterLine();
         System.out.println("Starting transaction between accounts!");
         try {
-            if (users.get(currentUserAccountNumber).getPayrollAccount().accountNumber == fromAcc
-            || users.get(currentUserAccountNumber).getSavingsAccount().accountNumber == fromAcc) {
-                accounts.get(fromAcc).withdrawal(amount);
-            }
-            else throw new IllegalArgumentException("You can only make a withdrawal from your own accounts!");
+            if (users.get(currentUserAccountNumber).getPayrollAccount().getAccountNumber() == fromAcc
+                    || users.get(currentUserAccountNumber).getSavingsAccount().getAccountNumber() == fromAcc) {
+                try {
+                    getAccount(fromAcc).withdrawal(amount);
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                }
+            } else
+                throw new IllegalArgumentException("You can only make a withdrawal from your own accounts!");
             try {
-                accounts.get(toAcc).deposit(amount);
+                getAccount(toAcc).deposit(amount);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
-                System.out.println("Starting rollback process..");
-                //rollback
-                System.out.println("Rollback transaction:");
-                Bank.getUser(fromAcc).getAccount(fromAcc).deposit(amount);
-
             }
             System.out.println("Transaction completed successfully!");
             printRowDelimiterLine();
@@ -108,5 +107,15 @@ public class Bank {
             showUserAccounts(user.getAccountNumber());
         }
         printRowDelimiterLine();
+    }
+
+    static Account getAccount(int accountNumber) {
+
+        if (accounts.get(accountNumber) != null) {
+            return accounts.get(accountNumber);
+        } else {
+            throw new IllegalArgumentException("Could not find Account with that account number!");
+        }
+
     }
 }
