@@ -40,9 +40,10 @@ public class Bank {
     /**
      * Creates user account by first generating unique account and user numbers. Each user account has
      * savings bank account and payroll bank account. Account number is generated for each.
-     * @param name
-     * @param pinNumber
-     * @return
+     * Also creates savings account and payroll account object for each user.
+     * @param name Class User constructor needs name so it is passed from input via name parameter.
+     * @param pinNumber Class User constructor needs pin so it is passed from input via pinNumber parameter.
+     * @return newly created user account number
      */
     static int createUser(String name, int pinNumber) {
         int userAccountNumber = generateAccountNumber();
@@ -68,11 +69,14 @@ public class Bank {
         System.out.println("=============================================================================================");
     }
 
-
+    /**
+     * Shows user account's savings and bank account, including bank account number and balance
+     * @param userAccountNumber user account number passed from input.
+     */
     static void showUserAccounts(int userAccountNumber) {
         System.out.println("Showing your accounts:");
         printRowDelimiterLine();
-        User user = users.get(userAccountNumber);
+        User user = getUser(userAccountNumber);
         System.out.println("Account name: " + user.getName());
         printRowDelimiterLine();
         System.out.println("Savings account number: " +
@@ -86,6 +90,11 @@ public class Bank {
         printRowDelimiterLine();
     }
 
+    /**
+     *
+     * @param accountNumber returns user object form given user account number
+     * @return User object
+     */
     static User getUser(int accountNumber) {
 
         if (users.get(accountNumber) != null) {
@@ -96,6 +105,12 @@ public class Bank {
 
     }
 
+    /**
+     * Returns user object by name and pin-number.
+     * @param name uses username to find corresponding user object
+     * @param pinNumber uses pin -number to find corresponding user object
+     * @return user object that has given username and pin
+     */
     static User getUserByNameAndPin(String name, int pinNumber) {
         User user = null;
         for (User usr : users.values()) {
@@ -104,7 +119,7 @@ public class Bank {
             }
         }
         if (user == null) {
-            throw new IllegalArgumentException("Could not find user account! Invalid pin or user name!");
+            throw new IllegalArgumentException("Could not find user account! Invalid pin or username!");
         } else {
             return user;
         }
@@ -116,6 +131,7 @@ public class Bank {
         printRowDelimiterLine();
         System.out.println("Starting transaction between accounts!");
         try {
+            //We can not withdraw amount for transfer unless we are logged in as corresponding user
             if (users.get(currentUserAccountNumber).getPayrollAccount().getAccountNumber() == fromAcc
                     || users.get(currentUserAccountNumber).getSavingsAccount().getAccountNumber() == fromAcc) {
                 try {
