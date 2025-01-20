@@ -26,6 +26,9 @@ public class User {
      */
     private final int accountNumber;
 
+    /**
+     * Variable storing User account pin-number.
+     */
     private final int pinNumber;
 
     public User(SavingsAccount savingsAccount,
@@ -42,26 +45,50 @@ public class User {
 
     }
 
+    /**
+     *
+     * @return Returns this users payroll bank account object
+     */
     public PayrollAccount getPayrollAccount() {
         return payrollAccount;
     }
 
+    /**
+     *
+     * @return this user's name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @return this user's account number
+     */
     public int getAccountNumber() {
         return accountNumber;
     }
-
+    /**
+     *
+     * @return this user's account pin-number
+     */
     public int getPinNumber() {
         return pinNumber;
     }
 
+    /**
+     *
+     * @return Returns this users savings bank account object
+     */
     public SavingsAccount getSavingsAccount() {
         return savingsAccount;
     }
 
+    /**
+     * Checks if current bank account belongs to this user account.
+     * @param accountNr bank account number we want to ceck
+     * @return bank account object
+     */
     Account getAccount(int accountNr) {
         Account account = null;
 
