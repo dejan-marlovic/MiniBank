@@ -48,7 +48,6 @@ public class Main {
                             continue;
                         } catch (RuntimeException e) {
                             System.out.println(e.getMessage());
-                            scanner.nextLine();
                             continue;
                         }
 
@@ -65,8 +64,8 @@ public class Main {
                             System.out.println("Invalid input! Please enter a numeric value for the pin number.");
                             scanner.nextLine(); // Clear the invalid input from the scanner
                             continue;
-                        } catch (RuntimeException e) {
-                            System.out.println(e.getMessage());// Catches IllegalArgumentException
+                        } catch (RuntimeException e) {// Catches IllegalArgumentException
+                            System.out.println(e.getMessage());
                             scanner.nextLine();
                             continue;
                         }
