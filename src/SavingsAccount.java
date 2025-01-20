@@ -1,6 +1,6 @@
 
 /**
- * Class representing savings account, extends Account
+ * Class representing savings bank account for each user, extends Account
  */
 public class SavingsAccount  extends Account{
 
