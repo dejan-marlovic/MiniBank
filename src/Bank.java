@@ -8,7 +8,7 @@ import java.util.HashMap;
  */
 public class Bank {
     /**
-     * accountCounter keeps track of each account number and inrements each time new account is created via function:
+     * accountCounter keeps track of each account number and increments each time new account is created via function:
      * generateAccountNumber()
      */
     private static int accountCounter;
