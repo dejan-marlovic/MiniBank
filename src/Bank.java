@@ -128,8 +128,8 @@ public class Bank {
 
     /**
      * Function for transferring funds between accounts
-     * @param fromAcc parameter representing account we transfer funds to.
-     * @param toAcc parameter representing account we transfer funds from.
+     * @param fromAcc parameter representing account we transfer funds from.
+     * @param toAcc parameter representing account we transfer funds to.
      * @param amount amount we want to transfer.
      * @param currentUserAccountNumber we use current account number form input to make sure that we are allowed to withdraw funds.
      */
@@ -161,6 +161,9 @@ public class Bank {
         printRowDelimiterLine();
     }
 
+    /**
+     * Listing all bank account each user object has
+     */
     static void showAllAccounts() {
         printRowDelimiterLine();
         System.out.println("Showing all accounts you can deposit funds to:");
@@ -171,6 +174,11 @@ public class Bank {
         printRowDelimiterLine();
     }
 
+    /**
+     * Lists bank account numbers
+     * @param accountNumber returns bank account object from corresponding bank account parameter
+     * @return Account object
+     */
     static Account getAccount(int accountNumber) {
 
         if (accounts.get(accountNumber) != null) {
@@ -181,7 +189,11 @@ public class Bank {
 
     }
 
-    static void validateAccountName(String accountName) {
+    /**
+     * Validates user account name from input. For example: account name can not contain numbers.
+     * @param accountName account name that is used for creation of user account objects
+     */
+    static void validateUserAccountName(String accountName) {
         if (accountName.matches(".*\\d.*")) {
             throw new IllegalArgumentException("Name can not contain numbers!");
         }

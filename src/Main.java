@@ -34,7 +34,7 @@ public class Main {
                         try {
                             System.out.println("Enter name you wish to create account under:");
                             accountName = scanner.nextLine();
-                            Bank.validateAccountName(accountName);
+                            Bank.validateUserAccountName(accountName);
                             System.out.println("Enter pin number:");
                             pinNumber = scanner.nextInt();
                             scanner.nextLine();
@@ -55,7 +55,7 @@ public class Main {
                     case 2:
                         try {
                             System.out.println("Enter your username:");
-                            Bank.validateAccountName(accountName);
+                            Bank.validateUserAccountName(accountName);
                             accountName = scanner.nextLine();
                             System.out.println("Enter your pin number:");
                             pinNumber = scanner.nextInt();
