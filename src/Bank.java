@@ -74,7 +74,7 @@ public class Bank {
      * @param userAccountNumber user account number passed from input.
      */
     static void showUserAccounts(int userAccountNumber) {
-        System.out.println("Showing your accounts:");
+        System.out.println("Showing user account:");
         printRowDelimiterLine();
         User user = getUser(userAccountNumber);
         System.out.println("Account name: " + user.getName());
