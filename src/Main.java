@@ -116,13 +116,13 @@ public class Main {
                         break;
                     case 2:
                         try {
-                            System.out.println("Enter an account number you want to transfer funds from: ");
+                            Bank.printRowDelimiterLine();
                             Bank.showUserAccounts(currentUserAccountNumber);
+                            System.out.println("Enter an account number you want to transfer funds from: ");
                             int fromAccount = scanner.nextInt();
                             scanner.nextLine();
                             Bank.printRowDelimiterLine();
                             Bank.showAllAccounts();
-                            Bank.printRowDelimiterLine();
                             System.out.println("Enter an account number you want to transfer funds to: ");
                             int toAccount = scanner.nextInt();
                             scanner.nextLine();
@@ -140,7 +140,6 @@ public class Main {
                     case 3:
                         isLoggedIn = false;
                         System.out.println("You have been logged out. Returning to login screen...");
-                        scanner.nextLine();
                         break;
 
                     case 4:
@@ -156,7 +155,7 @@ public class Main {
                             break;
 
                         } catch (InputMismatchException e) {
-                            System.out.println("Invalid input! Please enter integer account number!");
+                            System.out.println("Invalid input! Please enter numeric value!");
                             scanner.nextLine(); // Clear the invalid input from the scanner
                             continue;
                         }catch (RuntimeException e) {
